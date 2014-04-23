@@ -15,3 +15,4 @@
       `((".*" ,(expand-file-name (concat dotfiles-dir "backups")))))
 
 (load "~/.dotfiles/emacs.d/package-manager.el")
+(load "~/.dotfiles/emacs.d/stats.el")
