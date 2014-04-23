@@ -12,7 +12,7 @@
 (add-hook 'ess-mode-hook 'my-ac-ess-config)
 (add-hook 'ess-post-run-hook 'my-ac-ess-config)
 
-(setq ess-busy-strings ess--busy-slash)
+;(setq ess-busy-strings ess-busy-slash)
 
 ; https://stat.ethz.ch/pipermail/ess-help/
 ; attachments/20110606/262ab5f7/attachment.pl
