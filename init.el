@@ -13,3 +13,5 @@
 ;; http://stackoverflow.com/a/2020954
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name (concat dotfiles-dir "backups")))))
+
+(load "~/.dotfiles/emacs.d/package-manager.el")
