@@ -2,3 +2,6 @@ Install the following using M-x package-install:
 
 ess
 git-gutter
+auto-complete
+whitespace
+fill-column-indicator
