@@ -5,3 +5,6 @@
         ido-enable-flex-matching t
         ido-create-new-buffer 'always
         ido-max-prospects 10))
+
+;; Save a list of recent files visited.
+(recentf-mode 1)
