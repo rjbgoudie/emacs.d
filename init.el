@@ -17,3 +17,4 @@
 (load "~/.dotfiles/emacs.d/package-manager.el")
 (load "~/.dotfiles/emacs.d/stats.el")
 (load "~/.dotfiles/emacs.d/git.el")
+(load "~/.dotfiles/emacs.d/theme.el")
