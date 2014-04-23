@@ -1,0 +1,4 @@
+Install the following using M-x package-install:
+
+ess
+git-gutter
