@@ -19,3 +19,4 @@
 (load "~/.dotfiles/emacs.d/git.el")
 (load "~/.dotfiles/emacs.d/theme.el")
 (load "~/.dotfiles/emacs.d/text.el")
+(load "~/.dotfiles/emacs.d/convenience.el")
