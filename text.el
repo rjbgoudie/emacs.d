@@ -18,3 +18,6 @@
 (setq fci-rule-color "#49426c")
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
   (global-fci-mode 1)
+
+;; Highlight matching parentheses when the point is on them.
+(show-paren-mode 1)
