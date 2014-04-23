@@ -14,6 +14,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name (concat dotfiles-dir "backups")))))
 
+(load "~/.dotfiles/emacs.d/basic.el")
 (load "~/.dotfiles/emacs.d/package-manager.el")
 (load "~/.dotfiles/emacs.d/stats.el")
 (load "~/.dotfiles/emacs.d/git.el")
