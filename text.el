@@ -1,3 +1,4 @@
+(set-default 'indicate-empty-lines t)
 (setq-default show-trailing-whitespace t)
 (setq require-final-newline t)
 
