@@ -21,3 +21,7 @@
 
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
+;; Prevent Extraneous Tabs
+;; https://www.gnu.org/software/emacs/manual/html_node/eintr/
+;; Indent-Tabs-Mode.html
+(setq-default indent-tabs-mode nil)
