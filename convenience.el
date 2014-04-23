@@ -8,3 +8,7 @@
 
 ;; Save a list of recent files visited.
 (recentf-mode 1)
+
+;; Yes or No alias
+;; http://www.emacswiki.org/emacs/YesOrNoP
+(defalias 'yes-or-no-p 'y-or-n-p)
