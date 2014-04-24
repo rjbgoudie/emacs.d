@@ -1,0 +1,1 @@
+(load "~/.dotfiles/emacs.d/vendor/package.el")
