@@ -8,6 +8,18 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#1c1c1c")
 
+;; Set the colour of the mode-line, and its activated highlight colour
+;; http://stackoverflow.com/a/9448316
+(set-face-attribute  'mode-line
+                 nil
+                 :foreground "black"
+                 :background "darkorange"
+                 :box '(:line-width 1 :style released-button))
+(set-face-attribute  'mode-line-inactive
+                 nil
+                 :foreground "white"
+                 :background "gray25"
+                 :box '(:line-width 1 :style released-button))
 
 ;; change magit diff colors
 ;; http://readystate4.com/2011/02/22/emacs-changing-magits-default-diff-colors
