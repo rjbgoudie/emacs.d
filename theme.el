@@ -27,5 +27,7 @@
   '(progn
      (set-face-foreground 'magit-diff-add "green3")
      (set-face-foreground 'magit-diff-del "red3")
+     (set-face-background 'magit-diff-add "#1c1c1c")
+     (set-face-background 'magit-diff-del "#1c1c1c")
      (when (not window-system)
        (set-face-background 'magit-item-highlight "black"))))
