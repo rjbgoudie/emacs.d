@@ -31,3 +31,8 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/eintr/
 ;; Indent-Tabs-Mode.html
 (setq-default indent-tabs-mode nil)
+
+;;; NARROWING MODE
+;; Enable narrowing mode
+;; http://www.emacswiki.org/emacs/BasicNarrowing
+(put 'narrow-to-region 'disabled nil)
