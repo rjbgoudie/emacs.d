@@ -13,3 +13,6 @@
 ;; http://stackoverflow.com/a/7398351
 ;; https://groups.google.com/forum/#!topic/gnu.emacs.help/e8dfr2cYPTg
 (add-hook 'magit-mode-hook 'visual-line-mode)
+
+;;; Word-differences in magit diffs
+(setq magit-diff-refine-hunk 'all)
