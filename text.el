@@ -36,3 +36,8 @@
 ;; Enable narrowing mode
 ;; http://www.emacswiki.org/emacs/BasicNarrowing
 (put 'narrow-to-region 'disabled nil)
+
+;;; AUTO-COMPLETE MODE
+;; Enable everywhere
+;; http://stackoverflow.com/a/8098380
+(global-auto-complete-mode t)
