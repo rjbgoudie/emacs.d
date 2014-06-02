@@ -19,10 +19,10 @@
 
 (load "~/.dotfiles/emacs.d/basic.el")
 (load "~/.dotfiles/emacs.d/package-manager.el")
-(load "~/.dotfiles/emacs.d/stats.el")
 (load "~/.dotfiles/emacs.d/git.el")
-(load "~/.dotfiles/emacs.d/theme.el")
 (load "~/.dotfiles/emacs.d/text.el")
 (load "~/.dotfiles/emacs.d/convenience.el")
 (load "~/.dotfiles/emacs.d/bindings.el")
 (load "~/.dotfiles/emacs.d/ui.el")
+(load "~/.dotfiles/emacs.d/stats.el")
+(load "~/.dotfiles/emacs.d/theme.el")
