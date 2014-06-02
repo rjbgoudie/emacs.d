@@ -26,17 +26,10 @@
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
-;; Automatically match parenthesis when typed
-;; https://stat.ethz.ch/pipermail/ess-help/2009-June/005411.html
-;; enable skeleton-pair insert globally
-(setq skeleton-pair t)
-;;(setq skeleton-pair-on-word t)
-(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
-(global-set-key (kbd "\`") 'skeleton-pair-insert-maybe)
+; Automatically pairs up brackets, in a sane way, like TextMate does
+; https://github.com/capitaomorte/autopair
+(require 'autopair)
+(autopair-global-mode)
 
 ;;; TABS
 ;; Prevent Extraneous Tabs
