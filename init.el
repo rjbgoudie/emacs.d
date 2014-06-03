@@ -26,3 +26,7 @@
 (load "~/.dotfiles/emacs.d/convenience.el")
 (load "~/.dotfiles/emacs.d/bindings.el")
 (load "~/.dotfiles/emacs.d/ui.el")
+
+;(if (eq system-type 'darwin)
+  (load "~/.dotfiles/emacs.d/mac.el")
+;)
