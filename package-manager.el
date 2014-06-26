@@ -27,10 +27,14 @@
 (defvar my-packages '(auto-complete ess ac-math auctex color-theme magit git-gutter yasnippet fill-column-indicator flymake autopair)
   "A list of packages to ensure are installed at launch.")
 
-;; Additional emacs 24 packages
-(when (>= emacs-major-version 24)
-  (add-to-list 'my-packages '(project-explorer)))
+(defvar my-24-packages '(project-explorer))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; Additional emacs 24 packages
+(when (>= emacs-major-version 24)
+  (dolist (p my-24-packages)
+  (when (not (package-installed-p p))
+    (package-install p))))
