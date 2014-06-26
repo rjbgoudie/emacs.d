@@ -42,11 +42,14 @@
 ;; http://www.emacswiki.org/emacs/BasicNarrowing
 (put 'narrow-to-region 'disabled nil)
 
+;;; YASNIPPET
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;;; AUTO-COMPLETE MODE
 ;; Enable everywhere
 ;; http://stackoverflow.com/a/8098380
+(require 'auto-complete)
 (global-auto-complete-mode t)
-(define-key ac-completing-map (kbd "M-h") 'ac-quick-help)
 (require 'auto-complete-config)
 (ac-config-default)
-(setq ac-auto-start 0)

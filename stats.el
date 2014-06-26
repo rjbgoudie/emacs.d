@@ -12,10 +12,11 @@
 
 (defun my-ac-ess-config ()
   (setq ac-sources
-    '(ac-source-R
-      ac-source-filename
-      ac-source-words-in-buffer
-      ac-source-files-in-current-dir)))
+        (append '(ac-source-R
+                  ac-source-filename
+                  ac-source-words-in-buffer
+                  ac-source-files-in-current-dir)
+                ac-sources)))
 
 (add-hook 'ess-mode-hook 'my-ac-ess-config)
 (add-hook 'ess-post-run-hook 'my-ac-ess-config)
