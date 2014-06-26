@@ -60,11 +60,12 @@
   :foreground "brightwhite")
 
 ;; ESS SETTINGS
-(set-face-attribute 'ess-function-call-face
-  nil
-  :foreground "#00ffff"
-  :weight 'normal
-  :inverse-video nil)
+(when (> emacs-major-version 23.1)
+  (set-face-attribute 'ess-function-call-face
+                      nil
+                      :foreground "#00ffff"
+                      :weight 'normal
+                      :inverse-video nil))
 
 ;; FLAYMAKE
 (set-face-attribute 'flymake-errline
