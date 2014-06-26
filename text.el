@@ -56,8 +56,7 @@
 ;;; AUTO-COMPLETE MODE
 ;; Enable everywhere
 ;; http://stackoverflow.com/a/8098380
+(require 'auto-complete)
 (global-auto-complete-mode t)
-(define-key ac-completing-map (kbd "M-h") 'ac-quick-help)
 (require 'auto-complete-config)
 (ac-config-default)
-(setq ac-auto-start 0)
