@@ -27,7 +27,3 @@
 (load "~/.dotfiles/emacs.d/stats.el")
 (load "~/.dotfiles/emacs.d/tex.el")
 (load "~/.dotfiles/emacs.d/theme.el")
-
-(if (eq system-type 'darwin)
-  (load "~/.dotfiles/emacs.d/mac.el")
-)
