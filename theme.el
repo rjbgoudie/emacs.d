@@ -60,7 +60,9 @@
   :foreground "brightwhite")
 
 ;; ESS SETTINGS
-(when (> emacs-major-version 23.1)
+;; Unless is to cover emacs 23.1 on BSU's HPC, which does not like this for
+;; some reason
+(unless (and (<= emacs-major-version 23) (<= emacs-minor-version 1))
   (set-face-attribute 'ess-function-call-face
                       nil
                       :foreground "#00ffff"
