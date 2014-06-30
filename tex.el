@@ -74,3 +74,28 @@
                   ("hspace" "*")
                   ("usepackage" ""))
                 'function))
+
+;; Flymake is enables in stats.el
+(defun init-latex--flymake-setup ()
+  "Setup flymake for latex using one of the checker available on the system.
+It either tries \"lacheck\" or \"chktex\"."
+  (interactive)
+  (cond ;; ((executable-find "lacheck")
+        ;;  (defun flymake-get-tex-args (file-name)
+        ;;    (list "lacheck" (list file-name))))
+        ((executable-find "chktex")
+         (defun flymake-get-tex-args (file-name)
+           (list "chktex" (list "-q" "-v0" file-name))))
+        (t nil)))
+
+(eval-after-load "flymake" '(init-latex--flymake-setup))
+
+
+(defun my-flymake-show-help ()
+   (when (get-char-property (point) 'flymake-overlay)
+     (let ((help (get-char-property (point) 'help-echo)))
+       (if help (message "%s" help)))))
+
+(add-hook 'post-command-hook 'my-flymake-show-help)
+
+(add-hook 'TeX-mode-hook 'flymake-mode)
