@@ -58,3 +58,19 @@
 
 (add-hook 'TeX-mode-hook 'visual-line-mode)
 (add-hook 'Tex-mode-hook (lambda () (fci-mode)))
+
+;; Don't hightlight quite so much
+;; http://tex.stackexchange.com/a/120755
+(eval-after-load "font-latex"
+  '(font-latex-add-keywords '(("newenvironment" "*{[[")
+                  ("renewenvironment" "*{[[")
+                  ("newcommand" "*|[[")
+                  ("renewcommand" "*|{\\[[")
+                  ("providecommand" "*|{\\[[")
+                  ("fbox" "")
+                  ("mbox" "")
+                  ("sbox" "")
+                  ("vspace" "")
+                  ("hspace" "*")
+                  ("usepackage" ""))
+                'function))
