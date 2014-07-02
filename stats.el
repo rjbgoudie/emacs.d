@@ -81,3 +81,8 @@
                                  (ess-fl-keyword:delimiters . t)
                                  (ess-fl-keyword:= . t)
                                  (ess-R-fl-keyword:F&T . t)))
+
+;;; R-AUTOYAS
+;; https://github.com/mlf176f2/r-autoyas.el
+(require 'r-autoyas)
+(add-hook 'ess-mode-hook 'r-autoyas-ess-activate)
