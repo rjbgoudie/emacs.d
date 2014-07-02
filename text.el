@@ -53,3 +53,26 @@
 (global-auto-complete-mode t)
 (require 'auto-complete-config)
 (ac-config-default)
+
+;;; MULTIPLE CURSORS
+;; https://github.com/magnars/multiple-cursors.el
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; autopair messes with multiple cursors, so disable it
+(add-hook 'multiple-cursors-mode-enabled-hook (lambda ()
+                                                (autopair-mode -1)))
+(add-hook 'multiple-cursors-mode-disabled-hook (lambda ()
+                                                (autopair-mode t)))
+
+;;; PHI-SEARCH
+;; https://github.com/zk-phi/phi-search
+(require 'phi-search)
+(global-set-key (kbd "C-s") 'phi-search)
+(global-set-key (kbd "C-r") 'phi-search-backward)
+
+(require 'phi-replace)
+(global-set-key (kbd "M-%") 'phi-replace-query)
