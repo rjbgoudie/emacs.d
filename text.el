@@ -29,6 +29,8 @@
 ; Automatically pairs up brackets, in a sane way, like TextMate does
 ; https://github.com/capitaomorte/autopair
 (require 'autopair)
+;; http://emacs-fu.blogspot.co.uk/2010/06/automatic-pairing-of-brackets-and.html
+(setq autopair-autowrap t)
 (autopair-global-mode)
 
 ;;; TABS
