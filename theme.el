@@ -75,6 +75,17 @@
   :background "brightred"
   :foreground "brightwhite")
 
+;; PHI-SEARCH
+(set-face-attribute 'phi-search-selection-face nil
+                    :background "brightgreen"
+                    :foreground "black"
+                    :inverse-video nil)
+
+(set-face-attribute 'phi-search-match-face nil
+                    :background "green"
+                    :foreground "black"
+                    :inverse-video nil)
+
 ;; MAGIT SETTINGS
 ;; http://readystate4.com/2011/02/22/emacs-changing-magits-default-diff-colors
 (eval-after-load 'magit
