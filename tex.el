@@ -2,13 +2,21 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 
-(setq-default TeX-master nil)
-;(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+;; Assume that the current buffer is the master
+;; https://www.gnu.org/software/auctex/manual/auctex/Multifile.html
+(setq-default TeX-master t)
+
+;; Wrap text in LaTeX mode
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+
 ;(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
+
+(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
 
 ;; Use Skim as viewer, enable source <-> PDF sync
 ;; make latexmk available via C-c C-c
@@ -19,15 +27,13 @@
       :help "Run latexmk on file")
     TeX-command-list)))
 
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
-
-
 ;; use Skim as default pdf viewer
 ;; Skim's displayline is used for forward search (from .tex to .pdf)
 ;; option -b highlights the current line; option -g opens Skim in the background
 (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
 (setq TeX-view-program-list
-  '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+  '(("PDF Viewer"
+     "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
 
 ;; Auto-complete for AucTex
 ;; https://github.com/monsanto/auto-complete-auctex/blob/master/
@@ -55,7 +61,6 @@
 
 ;; (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
-(add-hook 'TeX-mode-hook 'visual-line-mode)
 (add-hook 'Tex-mode-hook (lambda () (fci-mode)))
 
 ;; Don't hightlight quite so much
@@ -89,12 +94,9 @@ It either tries \"lacheck\" or \"chktex\"."
 
 (eval-after-load "flymake" '(init-latex--flymake-setup))
 
-
 (defun my-flymake-show-help ()
-   (when (get-char-property (point) 'flymake-overlay)
+  (when (get-char-property (point) 'flymake-overlay)
      (let ((help (get-char-property (point) 'help-echo)))
        (if help (message "%s" help)))))
 
 (add-hook 'post-command-hook 'my-flymake-show-help)
-
-(add-hook 'TeX-mode-hook 'flymake-mode)
