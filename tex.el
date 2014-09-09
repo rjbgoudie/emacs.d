@@ -9,7 +9,9 @@
 ;; Wrap text in LaTeX mode
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 
-;(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;; Turn on flyspell, which will use aspell if it is installed
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
