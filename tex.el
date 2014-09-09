@@ -115,3 +115,5 @@ It either tries \"lacheck\" or \"chktex\"."
        (if help (message "%s" help)))))
 
 (add-hook 'post-command-hook 'my-flymake-show-help)
+(add-hook 'TeX-mode-hook 'flymake-mode)
+
