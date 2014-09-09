@@ -16,16 +16,27 @@
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+;;; Compiling using latexmk ----------------------------------------------------
+;; https://sites.google.com/site/andreaskiermeier/essmaterials
+(setq TeX-file-extensions
+      '("Snw" "Rnw" "nw" "tex" "sty" "cls" "ltx" "texi" "texinfo"))
+;(add-to-list 'auto-mode-alist '("\\.Rnw$" . Rnw-mode))
+;(add-to-list 'auto-mode-alist '("\\.Snw$" . Snw-mode))
 
-;; Use Skim as viewer, enable source <-> PDF sync
-;; make latexmk available via C-c C-c
-;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
-(add-hook 'LaTeX-mode-hook (lambda ()
- (push
-    '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
-      :help "Run latexmk on file")
-    TeX-command-list)))
+(add-hook 'LaTeX-mode-hook
+ (lambda ()
+  (add-to-list 'TeX-command-list
+   '("latexmk" "latexmk -pdf %t"
+     TeX-run-TeX nil (latex-mode) :help "Run latexmk") t)
+  (setq TeX-command-default "latexmk")))
+
+;; (add-hook 'Rnw-mode-hook
+;;  (lambda ()
+;;   (add-to-list 'TeX-expand-list '("%rnw" file "Rnw" t) t)
+;;   (add-to-list 'TeX-command-list
+;;    '("latexmk" "latexmk -pdf %s.Rnw"
+;;      TeX-run-TeX nil (latex-mode) :help "Run Sweave") t)
+;;   (setq TeX-command-default "latexmk")))
 
 ;; use Skim as default pdf viewer
 ;; Skim's displayline is used for forward search (from .tex to .pdf)
