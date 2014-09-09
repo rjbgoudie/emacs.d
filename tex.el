@@ -90,6 +90,8 @@
                   ("usepackage" ""))
                 'function))
 
+;;; FLYMAKE -------------------------------------------------------------------
+
 ;; Flymake is enables in stats.el
 (defun init-latex--flymake-setup ()
   "Setup flymake for latex using one of the checker available on the system.
