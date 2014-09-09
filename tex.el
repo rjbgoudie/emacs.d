@@ -74,8 +74,6 @@
 
 ;; (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
-(add-hook 'Tex-mode-hook (lambda () (fci-mode)))
-
 ;; Don't hightlight quite so much
 ;; http://tex.stackexchange.com/a/120755
 (eval-after-load "font-latex"
