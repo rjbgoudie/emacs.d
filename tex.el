@@ -115,4 +115,3 @@ It either tries \"lacheck\" or \"chktex\"."
 
 (add-hook 'post-command-hook 'my-flymake-show-help)
 (add-hook 'TeX-mode-hook 'flymake-mode)
-
