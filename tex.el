@@ -48,6 +48,7 @@
   '(("PDF Viewer"
      "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
 
+;;; Auto-complete --------------------------------------------------------------
 ;; Auto-complete for AucTex
 ;; https://github.com/monsanto/auto-complete-auctex/blob/master/
 ;; auto-complete-auctex.el
