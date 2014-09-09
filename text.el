@@ -14,6 +14,9 @@
 ; https://github.com/alpaker/Fill-Column-Indicator
 (setq whitespace-style '(face trailing))
 
+;; SENTENCE MODE
+(setq sentence-end-double-space nil)
+
 ;;; TEXT WIDTH
 (require 'fill-column-indicator)
 (setq-default fci-rule-column 80)

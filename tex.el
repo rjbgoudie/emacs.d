@@ -2,33 +2,53 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 
-(setq-default TeX-master nil)
-;(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-;(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+;; Assume that the current buffer is the master
+;; https://www.gnu.org/software/auctex/manual/auctex/Multifile.html
+(setq-default TeX-master t)
+
+;; Wrap text in LaTeX mode
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+
+;; Turn on flyspell, which will use aspell if it is installed
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 
-;; Use Skim as viewer, enable source <-> PDF sync
-;; make latexmk available via C-c C-c
-;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
-(add-hook 'LaTeX-mode-hook (lambda ()
- (push
-    '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
-      :help "Run latexmk on file")
-    TeX-command-list)))
+;;; Compiling using latexmk ----------------------------------------------------
+;; https://sites.google.com/site/andreaskiermeier/essmaterials
+(setq TeX-file-extensions
+      '("Snw" "Rnw" "nw" "tex" "sty" "cls" "ltx" "texi" "texinfo"))
+;(add-to-list 'auto-mode-alist '("\\.Rnw$" . Rnw-mode))
+;(add-to-list 'auto-mode-alist '("\\.Snw$" . Snw-mode))
 
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+(add-hook 'LaTeX-mode-hook
+ (lambda ()
+  (add-to-list 'TeX-command-list
+   '("latexmk" "latexmk -pdf %t"
+     TeX-run-TeX nil (latex-mode) :help "Run latexmk") t)
+  (setq TeX-command-default "latexmk")))
 
+;; (add-hook 'Rnw-mode-hook
+;;  (lambda ()
+;;   (add-to-list 'TeX-expand-list '("%rnw" file "Rnw" t) t)
+;;   (add-to-list 'TeX-command-list
+;;    '("latexmk" "latexmk -pdf %s.Rnw"
+;;      TeX-run-TeX nil (latex-mode) :help "Run Sweave") t)
+;;   (setq TeX-command-default "latexmk")))
 
 ;; use Skim as default pdf viewer
 ;; Skim's displayline is used for forward search (from .tex to .pdf)
 ;; option -b highlights the current line; option -g opens Skim in the background
 (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
 (setq TeX-view-program-list
-  '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+  '(("PDF Viewer"
+     "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
 
+;;; Auto-complete --------------------------------------------------------------
 ;; Auto-complete for AucTex
 ;; https://github.com/monsanto/auto-complete-auctex/blob/master/
 ;; auto-complete-auctex.el
@@ -55,9 +75,6 @@
 
 ;; (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 
-(add-hook 'TeX-mode-hook 'visual-line-mode)
-(add-hook 'Tex-mode-hook (lambda () (fci-mode)))
-
 ;; Don't hightlight quite so much
 ;; http://tex.stackexchange.com/a/120755
 (eval-after-load "font-latex"
@@ -74,6 +91,8 @@
                   ("usepackage" ""))
                 'function))
 
+;;; FLYMAKE -------------------------------------------------------------------
+
 ;; Flymake is enables in stats.el
 (defun init-latex--flymake-setup ()
   "Setup flymake for latex using one of the checker available on the system.
@@ -89,12 +108,10 @@ It either tries \"lacheck\" or \"chktex\"."
 
 (eval-after-load "flymake" '(init-latex--flymake-setup))
 
-
 (defun my-flymake-show-help ()
-   (when (get-char-property (point) 'flymake-overlay)
+  (when (get-char-property (point) 'flymake-overlay)
      (let ((help (get-char-property (point) 'help-echo)))
        (if help (message "%s" help)))))
 
 (add-hook 'post-command-hook 'my-flymake-show-help)
-
 (add-hook 'TeX-mode-hook 'flymake-mode)
