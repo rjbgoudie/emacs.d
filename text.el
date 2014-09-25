@@ -27,7 +27,8 @@
 
 ;;; PARENTHESES
 ;; Highlight matching parentheses when the point is on them.
-(show-paren-mode 1)
+(show-paren-mode t)
+(setq show-paren-style 'expression)
 
 ; Automatically pairs up brackets, in a sane way, like TextMate does
 ; https://github.com/capitaomorte/autopair
@@ -81,3 +82,14 @@
 
 (require 'phi-replace)
 (global-set-key (kbd "M-%") 'phi-replace-query)
+
+;;; ORG-MODE
+(require 'org)
+(setq org-startup-indented t)
+(setq org-indent-mode t)
+; (add-hook 'org-mode-hook visual-line-mode)
+; (setq org-startup-truncated nil)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (org-indent-mode t))
+          t)
