@@ -55,7 +55,7 @@
 ;; PARENTHESES MATCHING
 (set-face-attribute 'show-paren-match
   nil
-  :background "brightmagenta"
+  :background "blue"
   :inherit t
   :foreground "brightwhite")
 
