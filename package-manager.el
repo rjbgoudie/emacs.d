@@ -22,9 +22,9 @@
 ;; (package-refresh-contents)
 
 ; ac-math is not on marmalade
-(setq package-archive-exclude-alist '(("melpa" auto-complete ess auctex color-theme magit git-gutter yasnippet fill-column-indicator flymake autopair r-autoyas)))
+(setq package-archive-exclude-alist '(("melpa" auto-complete ess auctex color-theme magit git-gutter yasnippet fill-column-indicator flymake autopair r-autoyas buffer-move)))
 
-(defvar my-packages '(auto-complete ess ac-math auctex color-theme magit git-gutter yasnippet fill-column-indicator flymake autopair multiple-cursors phi-search r-autoyas)
+(defvar my-packages '(auto-complete ess ac-math auctex color-theme magit git-gutter yasnippet fill-column-indicator flymake autopair multiple-cursors phi-search r-autoyas buffer-move)
   "A list of packages to ensure are installed at launch.")
 
 (defvar my-24-packages '(project-explorer))
