@@ -71,6 +71,10 @@
     (ess-arg-function-offset . nil)
     (ess-arg-function-offset-new-line . '(2))
     (ess-expression-offset . 2)
+    ;; The next two are to solve ggplot formatting
+    ;; https://github.com/emacs-ess/ESS/issues/99
+    (ess-continued-statement-offset . 0)
+    (ess-first-continued-statement-offset . 0)
   ))
 
 ;; Flymake
