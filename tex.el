@@ -9,6 +9,10 @@
 ;; Wrap text in LaTeX mode
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 
+;; Disable indentation
+(setq LaTeX-indent-level 0)
+(setq LaTeX-item-indent 0)
+
 ;; Turn on flyspell, which will use aspell if it is installed
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
@@ -30,7 +34,8 @@
   (add-to-list 'TeX-command-list
    '("latexmk" "latexmk -pdf %t"
      TeX-run-TeX nil (latex-mode) :help "Run latexmk") t)
-  (setq TeX-command-default "latexmk")))
+  (setq TeX-command-default "latexmk")
+  (add-to-list 'LaTeX-indent-environment-list '("tikzpicture"))))
 
 ;; (add-hook 'Rnw-mode-hook
 ;;  (lambda ()
