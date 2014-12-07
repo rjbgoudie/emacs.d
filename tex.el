@@ -58,7 +58,7 @@
 ;; https://github.com/monsanto/auto-complete-auctex/blob/master/
 ;; auto-complete-auctex.el
 (add-to-list 'load-path "~/.dotfiles/emacs.d/vendor/auto-complete-latex/")
-; (require 'auto-complete-auctex)
+(require 'auto-complete-auctex)
 (require 'auto-complete-latex)
 (require 'ac-math)
 (add-to-list 'ac-modes 'latex-mode) ; make auto-complete aware of {{{latex-mode}}}
