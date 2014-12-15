@@ -32,7 +32,7 @@
 (add-hook 'LaTeX-mode-hook
  (lambda ()
   (add-to-list 'TeX-command-list
-   '("latexmk" "latexmk -pdf %t"
+   '("latexmk" "latexmk -interaction=nonstopmode -pdf %t"
      TeX-run-TeX nil (latex-mode) :help "Run latexmk") t)
   (setq TeX-command-default "latexmk")
   (add-to-list 'LaTeX-indent-environment-list '("tikzpicture"))))
