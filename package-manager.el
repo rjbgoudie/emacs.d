@@ -13,16 +13,14 @@
   (require 'package-filter))
 
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/"))
-;; (add-to-list 'package-archives
-;;              '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 
 ;; (package-refresh-contents)
 
 ;; I have not set-up exclusion lists for emacs 24 yet
 (when (< emacs-major-version 24)
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/"))
   ; ac-math is not on marmalade
   (setq package-archive-exclude-alist '(("melpa"
                                          auto-complete
@@ -36,6 +34,22 @@
                                          autopair
                                          r-autoyas
                                          buffer-move))))
+
+(when (> emacs-major-version 23)
+  (add-to-list 'package-archives
+               '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+  ;; (setq package-pinned-packages '((auto-complete . "marmalade")
+  ;;                                 (auctex . "marmalade")
+  ;;                                 (color-theme . "marmalade")
+  ;;                                 (magit . "marmalade")
+  ;;                                 (git-gutter . "marmalade")
+  ;;                                 (yasnippet . "marmalade")
+  ;;                                 (fill-column-indicator . "marmalade")
+  ;;                                 (flymake . "marmalade")
+  ;;                                 (autopair . "marmalade")
+  ;;                                 (r-autoyas . "marmalade")
+  ;;                                 (buffer-move . "marmalade"))
+  )
 
 (defvar my-packages '(auto-complete
                       ess
