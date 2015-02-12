@@ -9,6 +9,7 @@
 ;; Wrap text in LaTeX mode
 (add-hook 'LaTeX-mode-hook (lambda () (fci-mode 0)))
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'adaptive-wrap-prefix-mode)
 
 ;; Disable indentation
 (setq LaTeX-indent-level 0)

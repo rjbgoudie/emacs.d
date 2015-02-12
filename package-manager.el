@@ -69,7 +69,7 @@
                       auto-complete-auctex)
   "A list of packages to ensure are installed at launch.")
 
-(defvar my-24-packages '(project-explorer))
+(defvar my-24-packages '(project-explorer adaptive-wrap))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
