@@ -7,6 +7,7 @@
 (setq-default TeX-master t)
 
 ;; Wrap text in LaTeX mode
+(add-hook 'LaTeX-mode-hook (lambda () (fci-mode 0)))
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 
 ;; Disable indentation
