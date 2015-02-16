@@ -12,7 +12,10 @@
 ;; https://gnu.org/software/emacs/manual/html_node/emacs/Visual-Line-Mode.html
 ;; http://stackoverflow.com/a/7398351
 ;; https://groups.google.com/forum/#!topic/gnu.emacs.help/e8dfr2cYPTg
-(add-hook 'magit-mode-hook 'visual-line-mode)
+;; Disable fci-mode, since it seems to prevent visual-line-mode from working
+(add-hook 'magit-mode-hook (lambda ()
+                             (fci-mode 0)
+                             (visual-line-mode)))
 
 ;;; Word-differences in magit diffs
 (setq magit-diff-refine-hunk 'all)
