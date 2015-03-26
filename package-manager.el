@@ -65,11 +65,10 @@
                       multiple-cursors
                       phi-search
                       r-autoyas
-                      buffer-move
-                      auto-complete-auctex)
+                      buffer-move)
   "A list of packages to ensure are installed at launch.")
 
-(defvar my-24-packages '(project-explorer adaptive-wrap))
+(defvar my-24-packages '(project-explorer adaptive-wrap auto-complete-auctex))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))

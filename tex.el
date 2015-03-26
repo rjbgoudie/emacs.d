@@ -59,18 +59,18 @@
 ;; Auto-complete for AucTex
 ;; https://github.com/monsanto/auto-complete-auctex/blob/master/
 ;; auto-complete-auctex.el
-(add-to-list 'load-path "~/.dotfiles/emacs.d/vendor/auto-complete-latex/")
-(require 'auto-complete-auctex)
-(require 'auto-complete-latex)
-(require 'ac-math)
-(add-to-list 'ac-modes 'latex-mode) ; make auto-complete aware of {{{latex-mode}}}
-(defun ac-latex-mode-setup ()       ; add ac-sources to default ac-sources
-  (setq ac-sources
-     (append '(ac-source-yasnippet ac-source-math-latex ac-source-latex-commands)
-           ac-sources)))
-(add-hook 'LaTeX-mode-hook 'ac-latex-mode-setup)
-(ac-flyspell-workaround)
-
+(when (> emacs-major-version 23)
+  (add-to-list 'load-path "~/.dotfiles/emacs.d/vendor/auto-complete-latex/")
+  (require 'auto-complete-auctex)
+  (require 'auto-complete-latex)
+  (require 'ac-math)
+  (add-to-list 'ac-modes 'latex-mode) ; make auto-complete aware of {{{latex-mode}}}
+  (defun ac-latex-mode-setup ()       ; add ac-sources to default ac-sources
+    (setq ac-sources
+          (append '(ac-source-yasnippet ac-source-math-latex ac-source-latex-commands)
+                  ac-sources)))
+  (add-hook 'LaTeX-mode-hook 'ac-latex-mode-setup)
+  (ac-flyspell-workaround))
 ;; (require 'ac-math)
 ;; (add-to-list 'ac-modes 'latex-mode)   ; make auto-complete aware of `latex-mode`
 
