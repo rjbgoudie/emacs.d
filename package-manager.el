@@ -68,7 +68,10 @@
                       buffer-move)
   "A list of packages to ensure are installed at launch.")
 
-(defvar my-24-packages '(project-explorer adaptive-wrap auto-complete-auctex))
+(defvar my-24-packages '(project-explorer
+                         adaptive-wrap
+                         auto-complete-auctex
+                         ace-window))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
