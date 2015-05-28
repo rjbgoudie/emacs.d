@@ -43,6 +43,11 @@
 ;; Indent-Tabs-Mode.html
 (setq-default indent-tabs-mode nil)
 
+;;; AGGRESSIVE-INDENT
+;; Enable for all programming modes
+(when (>= emacs-major-version 24)
+  (global-aggressive-indent-mode 1))
+
 ;;; NARROWING MODE
 ;; Enable narrowing mode
 ;; http://www.emacswiki.org/emacs/BasicNarrowing

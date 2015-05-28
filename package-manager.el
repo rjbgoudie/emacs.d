@@ -71,7 +71,8 @@
 (defvar my-24-packages '(project-explorer
                          adaptive-wrap
                          auto-complete-auctex
-                         ace-window))
+                         ace-window
+                         aggressive-indent))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
