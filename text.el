@@ -30,12 +30,13 @@
 (show-paren-mode t)
 (setq show-paren-style 'expression)
 
-; Automatically pairs up brackets, in a sane way, like TextMate does
-; https://github.com/capitaomorte/autopair
-(require 'autopair)
+;; Automatically pairs up brackets, in a sane way, like TextMate does
+;; https://github.com/capitaomorte/autopair
 ;; http://emacs-fu.blogspot.co.uk/2010/06/automatic-pairing-of-brackets-and.html
-(setq autopair-autowrap t)
-(autopair-global-mode)
+(when (< emacs-major-version 24)
+  (require 'autopair)
+  (setq autopair-autowrap t)
+  (autopair-global-mode))
 
 ;;; TABS
 ;; Prevent Extraneous Tabs
