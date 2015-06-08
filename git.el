@@ -19,3 +19,4 @@
 
 ;;; Word-differences in magit diffs
 (setq magit-diff-refine-hunk 'all)
+(setq magit-last-seen-setup-instructions "1.4.0")
