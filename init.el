@@ -27,3 +27,4 @@
 (load "~/.dotfiles/emacs.d/stats.el")
 (load "~/.dotfiles/emacs.d/tex.el")
 (load "~/.dotfiles/emacs.d/theme.el")
+(load "~/.dotfiles/emacs.d/sp.el")
