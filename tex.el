@@ -21,6 +21,8 @@
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-use-fonts t)
+(setq reftex-highlight-selection 'both)
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 
