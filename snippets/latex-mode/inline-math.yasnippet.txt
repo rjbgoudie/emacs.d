@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
-# key: mm
+# key: inline-math
+# binding: C-c m
 # group: math
 # name: Inline math \( ... \)
 # --
