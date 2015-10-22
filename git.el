@@ -19,4 +19,9 @@
 
 ;;; Word-differences in magit diffs
 (setq magit-diff-refine-hunk 'all)
+
 (setq magit-last-seen-setup-instructions "1.4.0")
+
+;; Needed to highlight whitespace changes
+;; https://github.com/magit/magit/issues/1689
+(setq smerge-refine-ignore-whitespace nil)
