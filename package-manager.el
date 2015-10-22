@@ -7,7 +7,7 @@
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (setq package-pinned-packages
-      '((ess . "melpa-stable")
+      '((ess . "melpa")
         (auctex . "gnu")
         (magit . "melpa-stable")
         (yasnippet . "melpa-stable")
