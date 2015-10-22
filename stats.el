@@ -58,24 +58,7 @@
 ;; http://ess.r-project.org/Manual/ess.html#index-ess_002dsmart_002dcomma
 (setq ess-R-smart-operators t)
 
-;; Formatting of R code
-;; https://gist.github.com/crowding/9075782
-(add-hook 'R-mode-hook 'rjbg-R-formatting-preferences)
-
-(defun rjbg-R-formatting-preferences ()
-  (ess-set-style 'rjbg-style)
-)
-
-(ess-add-style 'rjbg-style
-  '((ess-indent-level . 2)
-    (ess-arg-function-offset . nil)
-    (ess-arg-function-offset-new-line . '(2))
-    (ess-expression-offset . 2)
-    ;; The next two are to solve ggplot formatting
-    ;; https://github.com/emacs-ess/ESS/issues/99
-    (ess-continued-statement-offset . 0)
-    (ess-first-continued-statement-offset . 0)
-  ))
+(setq ess-default-style 'RStudio)
 
 ;; Flymake
 ;; https://gist.github.com/crowding/3984881
