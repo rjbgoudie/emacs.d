@@ -1,42 +1,36 @@
 ;;; WHITESPACE
-(set-default 'indicate-empty-lines t)
-(setq-default show-trailing-whitespace t)
-(setq require-final-newline t)
+(use-package whitespace
+  :defer 2
+  :init
+  (set-default 'indicate-empty-lines t)
+  (setq require-final-newline t)
 
-(require 'whitespace)
-;(setq whitespace-style '(face empty tabs lines-tail trailing))
-(global-whitespace-mode t)
-(setq whitespace-style
-      (quote (trailing tabs tab-mark empty)))
+  ;; fill-column-indicator is not compatible show-trailing-whitespace
+  ;; instead use this, as described
+  ;; https://github.com/alpaker/Fill-Column-Indicator
+  (setq whitespace-style '(face trailing tabs empty tab-mark))
 
-; fill-column-indicator is not compatible show-trailing-whitespace
-; instead use this, as described
-; https://github.com/alpaker/Fill-Column-Indicator
-(setq whitespace-style '(face trailing))
+  :config
+  (global-whitespace-mode t)
+  )
 
 ;; SENTENCE MODE
 (setq sentence-end-double-space nil)
 
 ;;; TEXT WIDTH
-(require 'fill-column-indicator)
-(setq-default fci-rule-column 80)
-(setq fci-rule-width 2)
-(setq fci-rule-color "#49426c")
-(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
-(global-fci-mode 1)
+(use-package fill-column-indicator
+  :config
+  (setq-default fci-rule-column 80)
+  (setq fci-rule-width 2)
+  (setq fci-rule-color "#49426c")
+  (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  (global-fci-mode 1)
+  )
 
 ;;; PARENTHESES
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode t)
 (setq show-paren-style 'expression)
-
-;; Automatically pairs up brackets, in a sane way, like TextMate does
-;; https://github.com/capitaomorte/autopair
-;; http://emacs-fu.blogspot.co.uk/2010/06/automatic-pairing-of-brackets-and.html
-(when (< emacs-major-version 24)
-  (require 'autopair)
-  (setq autopair-autowrap t)
-  (autopair-global-mode))
 
 ;;; TABS
 ;; Prevent Extraneous Tabs
@@ -46,25 +40,48 @@
 
 ;;; AGGRESSIVE-INDENT
 ;; Enable for all programming modes
-(when (>= emacs-major-version 24)
-  (global-aggressive-indent-mode 1))
+;;(when (>= emacs-major-version 24)
+;;  (global-aggressive-indent-mode 1))
+;;(add-to-list 'aggressive-indent-excluded-modes 'noweb-mode)
+(use-package aggressive-indent
+  :defer 1
+  :init
+  (global-aggressive-indent-mode 1)
+  (add-hook 'r-mode-hook #'aggressive-indent-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'noweb-mode)
+  )
 
 ;;; NARROWING MODE
 ;; Enable narrowing mode
 ;; http://www.emacswiki.org/emacs/BasicNarrowing
 (put 'narrow-to-region 'disabled nil)
 
-;;; YASNIPPET
-(require 'yasnippet)
-(yas-global-mode 1)
+;; ;;; YASNIPPET
+;; (use-package yasnippet
+;;   :defer 2
+;;   :init
+;;   (yas-global-mode 1)
+;;   )
 
 ;;; AUTO-COMPLETE MODE
 ;; Enable everywhere
 ;; http://stackoverflow.com/a/8098380
-(require 'auto-complete)
-(global-auto-complete-mode t)
-(require 'auto-complete-config)
-(ac-config-default)
+(use-package auto-complete
+  :config
+  (progn
+    (global-auto-complete-mode t)
+    (ac-config-default)
+    (use-package auto-complete-config
+      :ensure auto-complete)
+    ))
+
+(use-package company
+  :disabled
+  :pin melpa-stable
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
+  (add-hook 'global-company-mode-hook 'company-statistics-mode)
+  )
 
 ;;; MULTIPLE CURSORS
 ;; https://github.com/magnars/multiple-cursors.el
@@ -75,27 +92,49 @@
 ;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; autopair messes with multiple cursors, so disable it
-(add-hook 'multiple-cursors-mode-enabled-hook (lambda ()
-                                                (autopair-mode -1)))
-(add-hook 'multiple-cursors-mode-disabled-hook (lambda ()
-                                                (autopair-mode t)))
+;; (add-hook 'multiple-cursors-mode-enabled-hook (lambda ()
+;;                                                 (autopair-mode -1)))
+;; (add-hook 'multiple-cursors-mode-disabled-hook (lambda ()
+;;                                                 (autopair-mode t)))
 
 ;;; PHI-SEARCH
 ;; https://github.com/zk-phi/phi-search
-(require 'phi-search)
-(global-set-key (kbd "C-s") 'phi-search)
-(global-set-key (kbd "C-r") 'phi-search-backward)
+(use-package phi-search
+  :defer 2
+  :bind (("C-s" . phi-search)
+         ("C-r" . phi-search-backward))
+  :config
+  (set-face-attribute 'phi-search-selection-face nil
+                      :background "brightgreen"
+                      :foreground "black"
+                      :inverse-video nil)
 
-(require 'phi-replace)
-(global-set-key (kbd "M-%") 'phi-replace-query)
+  (set-face-attribute 'phi-search-match-face nil
+                      :background "green"
+                      :foreground "black"
+                      :inverse-video nil)
+  )
+
+(use-package phi-replace
+  :defer 2
+  :ensure phi-search
+  :bind ("M-%" . phi-replace-query)
+  :config
+  (set-face-attribute 'phi-search-selection-face nil
+                      :background "brightgreen"
+                      :foreground "black"
+                      :inverse-video nil)
+
+  (set-face-attribute 'phi-search-match-face nil
+                      :background "green"
+                      :foreground "black"
+                      :inverse-video nil)
+  )
 
 ;;; ORG-MODE
-(require 'org)
-(setq org-startup-indented t)
-(setq org-indent-mode t)
-; (add-hook 'org-mode-hook visual-line-mode)
-; (setq org-startup-truncated nil)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (org-indent-mode t))
-          t)
+(use-package org
+  :disabled
+  :init
+  (setq org-startup-indented t
+        org-indent-mode t)
+  )

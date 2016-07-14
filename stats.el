@@ -1,36 +1,20 @@
-(setq ess-default-style 'DEFAULT)
+;;; R-AUTOYAS
+;; https://github.com/mlf176f2/r-autoyas.el
+;; (require 'r-autoyas)
+;; (add-hook 'ess-mode-hook 'r-autoyas-ess-activate)
 
-(require 'ess-site)
-(ess-toggle-underscore nil)
-(setq ess-eval-visibly-p 'nowait)
-(setq ess-ask-for-ess-directory nil)
-(setq ess-local-process-name "R")
+;;; BUGS
+;; (require 'ess-bugs-d)
+;; (use-package ess-bugs-d
+;;   :ensure ess)
 
-(setq inferior-R-args "--no-save ")
-
-(add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
-
-(setq ess-roxy-str "#'")
-
-(defun my-ac-ess-config ()
+(defun my-ess-hook-config ()
   (setq ac-sources
         (append '(ac-source-R
                   ac-source-filename
                   ac-source-words-in-buffer
                   ac-source-files-in-current-dir)
                 ac-sources))
-  ;; https://stat.ethz.ch/pipermail/ess-help/2010-September/006384.html
-  ;; (make-local-variable 'adaptive-fill-regexp)
-  ;; (setq adaptive-fill-regexp (concat ess-roxy-str adaptive-fill-regexp))
-  ;; (make-local-variable 'adaptive-fill-first-line-regexp)
-  ;; (setq adaptive-fill-first-line-regexp
-  ;;       (concat ess-roxy-str
-  ;;               adaptive-fill-first-line-regexp))
-  ;; (make-local-variable 'paragraph-start)
-  ;; (setq paragraph-start (concat "\\(" ess-roxy-str "\\)*" paragraph-start))
-  ;; (make-local-variable 'paragraph-separate)
-  ;; (setq paragraph-separate
-  ;;       (concat "\\(" ess-roxy-str "\\)*" paragraph-separate))
   (set-fill-column 80)
   (auto-fill-mode)
   ;; http://stackoverflow.com/a/7502689
@@ -39,66 +23,59 @@
               (ess-nuke-trailing-whitespace)))
   )
 
-;; http://stackoverflow.com/a/7502689
-(setq ess-nuke-trailing-whitespace-p 'ask)
+(use-package r-mode
+  :mode ("\\.[rR]\\'" . R-mode)
+  :commands R
+  :ensure ess
+  :init
+  (setq ess-toggle-underscore nil
+        ess-eval-visibly-p 'nowait
+        ess-ask-for-ess-directory nil
+        ess-local-process-name "R"
+        inferior-R-args "--no-save "
+        ess-roxy-str "#'"
+        ess-default-style 'RStudio
+        ess-fancy-comments nil
+        inferior-S-prompt "[]\:~/[:space:]a-zA-Z0-9.[]*\\(?:[>+.] \\)*R> "
 
-(add-hook 'ess-mode-hook 'my-ac-ess-config)
-(add-hook 'ess-post-run-hook 'my-ac-ess-config)
+        ;; https://stat.ethz.ch/pipermail/ess-help/
+        ;; attachments/20110606/262ab5f7/attachment.pl
+        comint-scroll-to-bottom-on-input t
+        comint-scroll-to-bottom-on-output t
+        comint-move-point-for-output t
+        comint-scroll-show-maximum-output t
 
-;(setq ess-busy-strings ess-busy-slash)
+        ;; http://ess.r-project.org/Manual/ess.html#index-ess_002dsmart_002dcomma
+        ess-R-smart-operators t
 
-; https://stat.ethz.ch/pipermail/ess-help/
-; attachments/20110606/262ab5f7/attachment.pl
-(setq comint-scroll-to-bottom-on-input t)
-(setq comint-scroll-to-bottom-on-output t)
-(setq comint-move-point-for-output t)
-(setq comint-scroll-show-maximum-output t)
+        ;; http://stackoverflow.com/a/7502689
+        ess-nuke-trailing-whitespace-p 'ask)
 
-(setq ess-fancy-comments nil)
-;; http://ess.r-project.org/Manual/ess.html#index-ess_002dsmart_002dcomma
-(setq ess-R-smart-operators t)
+  :config
+  (add-hook 'ess-mode-hook 'my-ess-hook-config)
+  (add-hook 'ess-post-run-hook 'my-ess-hook-config)
+  (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
 
-(setq ess-default-style 'RStudio)
+  ;; THEME SETTINGS
+  (setq ess-R-font-lock-keywords '((ess-R-fl-keyword:modifiers . t)
+                                   (ess-R-fl-keyword:fun-defs . f)
+                                   (ess-R-fl-keyword:keywords . t)
+                                   (ess-R-fl-keyword:assign-ops . t)
+                                   (ess-R-fl-keyword:constants . t)
+                                   (ess-fl-keyword:fun-calls . t)
+                                   (ess-fl-keyword:numbers . t)
+                                   (ess-fl-keyword:operators . t)
+                                   (ess-fl-keyword:delimiters . t)
+                                   (ess-fl-keyword:= . t)
+                                   (ess-R-fl-keyword:F&T . t)))
 
-;; Flymake
-;; https://gist.github.com/crowding/3984881
-;; R flymake support (if Flymake is available) This will call a script
-;; "rflymake" with the path given; make sure it is on emac's exec-path
-;; or give a full path.
-(require 'flymake)
-
-(defun flymake-r-init ()
-  (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                     'flymake-create-temp-inplace))
-         (local-file (file-relative-name
-                      temp-file
-                      (file-name-directory buffer-file-name))))
-    (list "~/.dotfiles/bin/rflymake" (list local-file))))
-
-(add-to-list 'flymake-allowed-file-name-masks '("\\.[Rr]\\'" flymake-r-init))
-(add-to-list 'flymake-err-line-patterns
-             '("parse(\"\\([^\"]*\\)\"): \\([0-9]+\\):\\([0-9]+\\): \\(.*\\)$"
-               1 2 3 4))
-(add-hook 'ess-mode-hook
-          '(lambda () (flymake-mode)))
-
-;; THEME SETTINGS
-(setq ess-R-font-lock-keywords '((ess-R-fl-keyword:modifiers . t)
-                                 (ess-R-fl-keyword:fun-defs . f)
-                                 (ess-R-fl-keyword:keywords . t)
-                                 (ess-R-fl-keyword:assign-ops . t)
-                                 (ess-R-fl-keyword:constants . t)
-                                 (ess-fl-keyword:fun-calls . t)
-                                 (ess-fl-keyword:numbers . t)
-                                 (ess-fl-keyword:operators . t)
-                                 (ess-fl-keyword:delimiters . t)
-                                 (ess-fl-keyword:= . t)
-                                 (ess-R-fl-keyword:F&T . t)))
-
-;;; R-AUTOYAS
-;; https://github.com/mlf176f2/r-autoyas.el
-;; (require 'r-autoyas)
-;; (add-hook 'ess-mode-hook 'r-autoyas-ess-activate)
-
-;;; BUGS
-(require 'ess-bugs-d)
+  ;; ESS SETTINGS
+  ;; Unless is to cover emacs 23.1 on BSU's HPC, which does not like this for
+  ;; some reason
+  (unless (and (<= emacs-major-version 23) (<= emacs-minor-version 1))
+    (set-face-attribute 'ess-function-call-face
+                        nil
+                        :foreground "#00ffff"
+                        :weight 'normal
+                        :inverse-video nil))
+  )

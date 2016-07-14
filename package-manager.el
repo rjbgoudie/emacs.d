@@ -1,13 +1,15 @@
-(require 'package)
 (setq package-enable-at-startup nil)
+(setq use-package-verbose t
+      use-package-always-ensure t)
+(require 'package)
 
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
-	("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
-	("melpa" . "http://melpa.milkbox.net/packages/")))
+        ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
+        ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (setq package-pinned-packages
-      '((ess . "melpa")
+      '((ess . "melpa-stable")
         (auctex . "gnu")
         (magit . "melpa-stable")
         (yasnippet . "melpa-stable")
@@ -22,31 +24,15 @@
         (adaptive-wrap . "gnu")
         (ace-window . "melpa-stable")
         (aggressive-indent . "melpa-stable")
-        (smartparens . "melpa-stable")))
+        (smartparens . "melpa-stable")
+        (use-package . "melpa")))
 
 (package-initialize)
 
-;; (package-refresh-contents)
-
-(defun install-required-packages (package-list)
-  (dolist (package package-list)
-    (unless (package-installed-p package)
-      (package-install package))))
-
-(install-required-packages '(ess
-			     auctex
-			     magit
-			     yasnippet
-			     flymake
-			     auto-complete
-			     ac-math
-			     git-gutter
-			     fill-column-indicator
-			     phi-search
-			     r-autoyas
-			     project-explorer
-			     adaptive-wrap
-			     auto-complete-auctex
-			     ace-window
-			     aggressive-indent
-			     smartparens))
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)
+(require 'bind-key)
+(use-package auto-compile
+  :config
+  (auto-compile-on-load-mode))

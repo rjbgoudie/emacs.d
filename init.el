@@ -2,7 +2,7 @@
 
 ;; https://github.com/technomancy/emacs-starter-kit/blob/master/init.el#L20
 (setq dotfiles-dir (file-name-directory
-                   (or (buffer-file-name) load-file-name)))
+                    (or (buffer-file-name) load-file-name)))
 
 ;; Don't clutter up directories with files~
 ;; http://stackoverflow.com/a/2020954
@@ -22,8 +22,8 @@
 (load "~/.dotfiles/emacs.d/git.el")
 (load "~/.dotfiles/emacs.d/text.el")
 (load "~/.dotfiles/emacs.d/convenience.el")
-(load "~/.dotfiles/emacs.d/bindings.el")
 (load "~/.dotfiles/emacs.d/ui.el")
+(load "~/.dotfiles/emacs.d/flymake.el")
 (load "~/.dotfiles/emacs.d/stats.el")
 (load "~/.dotfiles/emacs.d/tex.el")
 (load "~/.dotfiles/emacs.d/theme.el")

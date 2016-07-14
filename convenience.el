@@ -1,10 +1,15 @@
-;; ido-mode is like magic pixie dust!
-(when (> emacs-major-version 21)
-  (ido-mode t)
+(use-package ido
+  :defer 1
+  :init
+  (ido-mode 1)
+  (ido-everywhere 1)
+
+  :config
   (setq ido-enable-prefix nil
         ido-enable-flex-matching t
         ido-create-new-buffer 'always
-        ido-max-prospects 10))
+        ido-max-prospects 10)
+  )
 
 ;; Save a list of recent files visited.
 (recentf-mode 1)
