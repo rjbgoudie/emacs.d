@@ -23,7 +23,7 @@
               (ess-nuke-trailing-whitespace)))
   )
 
-(use-package r-mode
+(use-package ess-site
   :mode ("\\.[rR]\\'" . R-mode)
   :commands R
   :ensure ess
