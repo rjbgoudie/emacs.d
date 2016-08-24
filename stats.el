@@ -28,8 +28,7 @@
   :commands R
   :ensure ess
   :init
-  (setq ess-toggle-underscore nil
-        ess-eval-visibly-p 'nowait
+  (setq ess-eval-visibly-p 'nowait
         ess-ask-for-ess-directory nil
         ess-local-process-name "R"
         inferior-R-args "--no-save "
@@ -52,6 +51,7 @@
         ess-nuke-trailing-whitespace-p 'ask)
 
   :config
+  (ess-toggle-underscore nil)
   (add-hook 'ess-mode-hook 'my-ess-hook-config)
   (add-hook 'ess-post-run-hook 'my-ess-hook-config)
   (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
