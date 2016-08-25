@@ -19,3 +19,34 @@
 ;;   (global-set-key (kbd "M-g e") 'avy-goto-word-0)
 ;;   (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 ;;   (global-set-key (kbd "M-g s") 'avy-goto-subword-0))
+
+(setq-default mode-line-format
+              (list " "
+                                        ; */% indicators if the file has been modified
+                    'mode-line-modified
+                    "--"
+                                        ; the name of the buffer (i.e. filename)
+                                        ; note this gets automatically highlighted
+                    'mode-line-buffer-identification
+                    "--"
+                                        ; major and minor modes in effect
+                    'mode-line-modes
+                                        ; if which-func-mode is in effect, display which
+                                        ; function we are currently in.
+                    '(which-func-mode ("" which-func-format "--"))
+                                        ; line, column, file %
+                    'mode-line-position
+                    "--"
+                                        ; if vc-mode is in effect, display version control
+                                        ; info here
+                    `(vc-mode vc-mode)
+                    "--"
+                                        ; hostname
+
+                    '(:eval (propertize (if (string-suffix-p "bsu" system-name) " " (system-name))
+                                        'face (if (string-suffix-p "bsu" system-name) 'mode-line 'font-lock-function-name-face)
+                                        ))
+                                        ; dashes sufficient to fill rest of modeline.
+                    "-%-"
+                    )
+              )
