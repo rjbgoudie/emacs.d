@@ -25,6 +25,7 @@
         (ace-window . "melpa-stable")
         (aggressive-indent . "melpa-stable")
         (smartparens . "melpa-stable")
+        (ack . "gnu")
         (use-package . "melpa")))
 
 (package-initialize)
