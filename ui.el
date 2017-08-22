@@ -2,7 +2,10 @@
 ;;   (setq pe/width 23)
 ;;   (project-explorer-open))
 
-(beacon-mode 1)
+(use-package beacon-mode
+  :ensure beacon
+  :init
+  (beacon-mode 1))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
