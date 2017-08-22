@@ -26,6 +26,7 @@
         (aggressive-indent . "melpa-stable")
         (smartparens . "melpa-stable")
         (ack . "gnu")
+        (beacon . "gnu")
         (use-package . "melpa")))
 
 (package-initialize)
