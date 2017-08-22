@@ -1,6 +1,7 @@
 (setq package-enable-at-startup nil)
 (setq use-package-verbose t
-      use-package-always-ensure t)
+      use-package-always-ensure t
+      package--init-file-ensured t)
 (require 'package)
 
 (setq package-archives
