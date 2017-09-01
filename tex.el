@@ -26,7 +26,6 @@
   ;; Wrap text in LaTeX mode
   (add-hook 'LaTeX-mode-hook (lambda () (fci-mode 0)))
   (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-  (add-hook 'LaTeX-mode-hook 'adaptive-wrap-prefix-mode)
 
   ;; Turn on flyspell, which will use aspell if it is installed
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
