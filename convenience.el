@@ -11,6 +11,12 @@
         ido-max-prospects 10)
   )
 
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  (setq projectile-enable-caching t))
+
 ;; Save a list of recent files visited.
 (recentf-mode 1)
 

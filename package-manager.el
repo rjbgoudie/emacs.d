@@ -28,6 +28,7 @@
         (smartparens . "melpa-stable")
         (ack . "gnu")
         (beacon . "gnu")
+        (projectile . "melpa-stable")
         (use-package . "melpa")))
 
 (package-initialize)
