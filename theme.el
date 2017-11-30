@@ -36,10 +36,9 @@
 (set-face-foreground 'font-lock-builtin-face "brightblue")
 
 (set-face-attribute 'font-lock-function-name-face
-  nil
-  :foreground "#00ffff"
-  :weight 'bold
-  :inverse-video t)
+                    nil
+                    :foreground "#00ffff"
+                    :weight 'bold)
 
 ;; HIGHLIGHT CURRENT LINE
 (set-face-attribute 'hl-line
