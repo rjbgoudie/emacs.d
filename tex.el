@@ -84,4 +84,15 @@
                                 ("usepackage" ""))
                               'function))
 
+  ;; https://stackoverflow.com/questions/19845598/emacs-regex-replacing-a-string-inside-a-latex-equation
+  (fset 'latex-replace-in-math
+        `(lambda (regexp to-string &optional delimited start end backward)
+       "Like `query-replace-regexp' but only replaces in LaTeX-math environments."
+       ,(interactive-form 'query-replace-regexp)
+       (let ((replace-re-search-function (lambda (regexp bound noerror)
+                           (catch :found
+                             (while (let ((ret (re-search-forward regexp bound noerror)))
+                              (when (save-match-data (texmathp)) (throw :found ret))
+                              ret))))))
+         (query-replace-regexp regexp to-string delimited start end backward))))
   )
