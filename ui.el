@@ -2,7 +2,7 @@
 ;;   (setq pe/width 23)
 ;;   (project-explorer-open))
 
-(use-package beacon-mode
+(use-package beacon
   :ensure beacon
   :init
   (beacon-mode 1))
