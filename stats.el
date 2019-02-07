@@ -8,6 +8,43 @@
 ;; (use-package ess-bugs-d
 ;;   :ensure ess)
 
+(defun my-ess-hook-init ()
+  (font-lock-add-keywords
+   nil
+   '(("\\<\\([.A-Za-z][._A-Za-z0-9]*\\)[\n[:blank:]]*("
+      1
+      font-lock-function-name-face)
+     ("\\([(,]\\|[\n[:blank:]]*\\)\\([.A-Za-z][._A-Za-z0-9]*\\)[\n[:blank:]]*=[^=]"
+      2
+      font-lock-reference-face)
+     ("\\(saveRDS\\|setGeneric\\|setGroupGeneric\\|setClass\\|setRefClass\\|setReplaceMethod\\)("
+      1
+      font-lock-reference-face)
+     ))
+
+  (set-face-attribute 'ess-%op%-face nil
+                      :foreground colorblind-red)
+
+  (set-face-attribute 'ess-paren-face nil
+                      :foreground "#cccccc")
+
+  (set-face-attribute 'ess-numbers-face nil
+                      :foreground colorblind-orange)
+
+  (set-face-attribute 'ess-operator-face nil
+                      :foreground colorblind-blue)
+
+  (set-face-attribute 'ess-assignment-face nil
+                      :foreground colorblind-blue)
+
+  (set-face-attribute 'font-lock-function-name-face nil
+                      :foreground colorblind-green)
+
+  (set-face-attribute 'font-lock-reference-face nil
+                      :background "#ff0000"
+                      :weight 'bold)
+  )
+
 (defun my-ess-hook-config ()
   (setq ac-sources
         (append '(ac-source-R
@@ -27,6 +64,7 @@
   :mode ("\\.[rR]\\'" . R-mode)
   :commands R
   :ensure ess
+  :defer t
   :init
   (setq ess-eval-visibly-p 'nowait
         ess-ask-for-ess-directory nil
@@ -49,25 +87,28 @@
 
         ;; http://stackoverflow.com/a/7502689
         ess-nuke-trailing-whitespace-p 'ask)
-
-  :config
-  (ess-toggle-underscore nil)
-  (add-hook 'ess-mode-hook 'my-ess-hook-config)
-  (add-hook 'ess-post-run-hook 'my-ess-hook-config)
-  (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
-
-  ;; THEME SETTINGS
-  (setq ess-R-font-lock-keywords '((ess-R-fl-keyword:modifiers . t)
-                                   (ess-R-fl-keyword:fun-defs . f)
-                                   (ess-R-fl-keyword:keywords . t)
-                                   (ess-R-fl-keyword:assign-ops . t)
+  (setq ess-R-font-lock-keywords '((ess-R-fl-keyword:keywords . t)
                                    (ess-R-fl-keyword:constants . t)
+                                   (ess-R-fl-keyword:modifiers . t)
+                                   (ess-R-fl-keyword:fun-defs . t)
+                                   (ess-R-fl-keyword:assign-ops . t)
+                                   (ess-R-fl-keyword:%op% . t)
                                    (ess-fl-keyword:fun-calls . t)
                                    (ess-fl-keyword:numbers . t)
                                    (ess-fl-keyword:operators . t)
                                    (ess-fl-keyword:delimiters . t)
                                    (ess-fl-keyword:= . t)
                                    (ess-R-fl-keyword:F&T . t)))
+
+  (add-hook 'ess-mode-hook 'my-ess-hook-init)
+
+  :config
+
+  (ess-toggle-underscore nil)
+  (add-hook 'ess-post-run-hook 'my-ess-hook-config)
+  (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
+
+  ;; THEME SETTINGS
 
   ;; ESS SETTINGS
   ;; Unless is to cover emacs 23.1 on BSU's HPC, which does not like this for

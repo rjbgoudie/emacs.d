@@ -22,7 +22,9 @@
   :config
   (setq-default fci-rule-column 80)
   (setq fci-rule-width 2)
-  (setq fci-rule-color "#49426c")
+  (setq fci-rule-character ? )
+  (setq fci-rule-character ?║)
+  (setq fci-rule-color "#414141")
   (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
   (global-fci-mode 1)
   )
